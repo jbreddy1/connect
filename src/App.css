@@ -815,6 +815,12 @@
   color: var(--text-muted);
 }
 
+.event-card__price {
+  color: var(--accent);
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
 .event-card__badge {
   font-size: 0.75rem;
   font-weight: 600;
@@ -1041,6 +1047,142 @@
   color: var(--error);
 }
 
+.event-detail__price {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.event-detail__paid-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.event-detail__paid-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.event-detail__register--pay {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  background: var(--accent-dim);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.event-detail__register--pay:hover {
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Registered event: timer, checklist, QR, WhatsApp, de-register */
+.event-registered {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.event-registered__timer {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.event-registered__checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-registered__check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.event-registered__checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--border-strong);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.event-registered__checkbox--done {
+  background: rgba(52, 211, 153, 0.2);
+  border-color: var(--success);
+}
+
+.event-registered__qr {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-elevated);
+  border-radius: 12px;
+  border: 1px solid var(--border-default);
+  text-align: center;
+}
+
+.event-registered__qr-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+}
+
+.event-registered__qr-img {
+  display: block;
+  margin: 0 auto 0.5rem;
+  border-radius: 8px;
+}
+
+.event-registered__qr-code {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  margin: 0;
+}
+
+.event-registered__whatsapp {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.event-registered__whatsapp:hover {
+  background: rgba(37, 211, 102, 0.25);
+}
+
+.event-registered__deregister {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: var(--error);
+  font-size: 0.9rem;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  border-radius: 8px;
+}
+.event-registered__deregister:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
 /* Club detail page */
 .club-detail {
   margin-bottom: 2rem;
@@ -1079,5 +1221,128 @@
 .club-detail__meta {
   font-size: 0.9rem;
   color: var(--text-muted);
+  margin: 0 0 1.5rem;
+}
+
+.club-detail__about {
+  margin-bottom: 1.5rem;
+}
+
+.club-detail__about-title,
+.club-detail__past-title,
+.club-detail__team-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+}
+
+.club-detail__about-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
   margin: 0;
+}
+
+.club-detail__past,
+.club-detail__team {
+  margin-bottom: 1.5rem;
+}
+
+.club-detail__past-list,
+.club-detail__team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.club-detail__past-item,
+.club-detail__team-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+}
+
+.club-detail__past-name,
+.club-detail__team-name {
+  color: var(--text-primary);
+}
+
+.club-detail__past-date,
+.club-detail__team-role {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Club lead dashboard */
+.club-lead-main {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.club-lead-desc {
+  margin-bottom: 1.5rem;
+}
+
+.club-lead-section {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+}
+
+.club-lead-section h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+.club-lead-paid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.club-lead-paid-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.club-lead-paid-event {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.club-lead-paid-user {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.club-lead-paid-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.club-lead-scan-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+}
+
+.club-lead-scan-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.club-lead-scan-form .auth-input {
+  flex: 1;
+  min-width: 200px;
 }

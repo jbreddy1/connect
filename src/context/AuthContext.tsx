@@ -10,7 +10,7 @@ interface AuthContextValue extends AuthState {
   login: (email: string, password: string, role?: Role) => User | null;
   signup: (name: string, email: string, password: string, role: Role) => User | null;
   logout: () => void;
-  updateUser: (updates: Partial<Pick<User, "name" | "email">>) => void;
+  updateUser: (updates: Partial<Pick<User, "name" | "email" | "class" | "section" | "rollNo" | "mobile">>) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(() => setUser(null), []);
 
-  const updateUser = useCallback((updates: Partial<Pick<User, "name" | "email">>) => {
+  const updateUser = useCallback((updates: Partial<Pick<User, "name" | "email" | "class" | "section" | "rollNo" | "mobile">>) => {
     setUser((prev) => (prev ? { ...prev, ...updates } : null));
   }, []);
 

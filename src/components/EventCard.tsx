@@ -24,6 +24,7 @@ export default function EventCard({ event, registeredCount, isRegistered, compac
         <h3 className="event-card__title">{event.title}</h3>
         <div className="event-card__footer">
           <span className="event-card__venue">{event.venue}</span>
+          {event.isPaid && event.price != null && <span className="event-card__price">₹{event.price}</span>}
           {isRegistered && <span className="event-card__badge event-card__badge--registered">Registered</span>}
           {isFull && !isRegistered && <span className="event-card__badge event-card__badge--full">Full</span>}
         </div>
@@ -45,6 +46,9 @@ export default function EventCard({ event, registeredCount, isRegistered, compac
       <div className="event-card__footer">
         <span className="event-card__spots">
           {registeredCount} / {event.registrationLimit} registered
+          {event.isPaid && event.price != null && (
+            <span className="event-card__price"> · ₹{event.price}</span>
+          )}
         </span>
         {isRegistered && <span className="event-card__badge event-card__badge--registered">You're in</span>}
         {isFull && !isRegistered && <span className="event-card__badge event-card__badge--full">Full</span>}

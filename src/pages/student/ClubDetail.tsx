@@ -30,6 +30,41 @@ export default function ClubDetail() {
         <h1 className="club-detail__title">{club.name}</h1>
         <p className="club-detail__desc">{club.description}</p>
         <p className="club-detail__meta">{club.memberCount} members · {events.length} upcoming events</p>
+
+        {club.about && (
+          <div className="club-detail__about">
+            <h2 className="club-detail__about-title">About</h2>
+            <p className="club-detail__about-text">{club.about}</p>
+          </div>
+        )}
+
+        {club.pastEvents && club.pastEvents.length > 0 && (
+          <div className="club-detail__past">
+            <h2 className="club-detail__past-title">Past events</h2>
+            <ul className="club-detail__past-list">
+              {club.pastEvents.map((pe) => (
+                <li key={pe.id} className="club-detail__past-item">
+                  <span className="club-detail__past-name">{pe.title}</span>
+                  <span className="club-detail__past-date">{pe.date}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {club.teamMembers && club.teamMembers.length > 0 && (
+          <div className="club-detail__team">
+            <h2 className="club-detail__team-title">Team members</h2>
+            <ul className="club-detail__team-list">
+              {club.teamMembers.map((tm, i) => (
+                <li key={i} className="club-detail__team-item">
+                  <span className="club-detail__team-name">{tm.name}</span>
+                  <span className="club-detail__team-role">{tm.role}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <section className="student-section">
