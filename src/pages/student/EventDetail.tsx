@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useRegistrations } from "../../context/RegistrationsContext";
 import { getEventById, getClubById } from "../../data/mockData";
 
 export default function EventDetail() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { getCountForEvent, isRegistered, addRegistration } = useRegistrations();
 
   const event = id ? getEventById(id) : undefined;
@@ -18,17 +17,9 @@ export default function EventDetail() {
 
   if (!event) {
     return (
-      <div className="student-dashboard">
-        <header className="student-header">
-          <Link to="/student/dashboard" className="student-brand">Connect</Link>
-          <button type="button" className="student-logout" onClick={() => navigate("/student/dashboard")}>
-            ← Back
-          </button>
-        </header>
-        <main className="student-main" style={{ textAlign: "center", padding: "3rem" }}>
-          <h1>Event not found</h1>
-          <Link to="/student/dashboard">Back to dashboard</Link>
-        </main>
+      <div className="student-main--detail" style={{ textAlign: "center", padding: "3rem" }}>
+        <h1>Event not found</h1>
+        <Link to="/student/dashboard">Back to dashboard</Link>
       </div>
     );
   }
@@ -61,60 +52,45 @@ export default function EventDetail() {
   };
 
   return (
-    <div className="student-dashboard">
-      <header className="student-header">
-        <div className="student-header__left">
-          <Link to="/student/dashboard" className="student-brand">Connect</Link>
-          <span className="student-role">Student</span>
+    <div className="student-main--detail">
+      <Link to="/student/events" className="event-detail-back">← Back to events</Link>
+
+      <article className="event-detail">
+        <div className="event-detail__header">
+          <span className="event-detail__club">{club?.name}</span>
+          <span className="event-detail__date">{event.date} · {event.time}</span>
         </div>
-        <div className="student-header__right">
-          <span className="student-user">{user?.name ?? "Student"}</span>
-          <button type="button" className="student-logout" onClick={logout}>
-            Log out
-          </button>
+        <h1 className="event-detail__title">{event.title}</h1>
+        <p className="event-detail__desc">{event.description}</p>
+        <div className="event-detail__meta">
+          <span>📍 {event.venue}</span>
+          <span>{registeredCount} / {event.registrationLimit} registered</span>
+          {full && <span className="event-detail__full">Event full</span>}
         </div>
-      </header>
 
-      <main className="student-main student-main--detail">
-        <Link to="/student/dashboard" className="event-detail-back">← Back to dashboard</Link>
-
-        <article className="event-detail">
-          <div className="event-detail__header">
-            <span className="event-detail__club">{club?.name}</span>
-            <span className="event-detail__date">{event.date} · {event.time}</span>
+        {message && (
+          <div className={`event-detail__message event-detail__message--${message.type}`} role="alert">
+            {message.text}
           </div>
-          <h1 className="event-detail__title">{event.title}</h1>
-          <p className="event-detail__desc">{event.description}</p>
-          <div className="event-detail__meta">
-            <span>📍 {event.venue}</span>
-            <span>{registeredCount} / {event.registrationLimit} registered</span>
-            {full && <span className="event-detail__full">Event full</span>}
-          </div>
+        )}
 
-          {message && (
-            <div className={`event-detail__message event-detail__message--${message.type}`} role="alert">
-              {message.text}
-            </div>
+        <div className="event-detail__actions">
+          {alreadyRegistered ? (
+            <span className="event-detail__badge">You're registered</span>
+          ) : full ? (
+            <span className="event-detail__badge event-detail__badge--full">Registration closed</span>
+          ) : (
+            <button
+              type="button"
+              className="event-detail__register"
+              onClick={handleRegister}
+              disabled={loading}
+            >
+              {loading ? "Registering…" : "Register for this event"}
+            </button>
           )}
-
-          <div className="event-detail__actions">
-            {alreadyRegistered ? (
-              <span className="event-detail__badge">You're registered</span>
-            ) : full ? (
-              <span className="event-detail__badge event-detail__badge--full">Registration closed</span>
-            ) : (
-              <button
-                type="button"
-                className="event-detail__register"
-                onClick={handleRegister}
-                disabled={loading}
-              >
-                {loading ? "Registering…" : "Register for this event"}
-              </button>
-            )}
-          </div>
-        </article>
-      </main>
+        </div>
+      </article>
     </div>
   );
 }
