@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useClubLeadNotifications } from "../context/ClubLeadNotificationsContext";
 import { useRegistrations } from "../context/RegistrationsContext";
 
 export default function ClubLeadDashboard() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const { paidRegistrations } = useClubLeadNotifications();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
   const { markAttended } = useRegistrations();
   const [scanCode, setScanCode] = useState("");
   const [scanMessage, setScanMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -31,7 +37,7 @@ export default function ClubLeadDashboard() {
         <Link to="/" className="dashboard-placeholder-brand">Connect</Link>
         <div>
           <span className="student-user" style={{ marginRight: "1rem" }}>{user?.name}</span>
-          <button type="button" className="student-logout" onClick={logout}>Log out</button>
+          <button type="button" className="student-logout" onClick={handleLogout}>Log out</button>
         </div>
       </header>
       <main className="dashboard-placeholder-main club-lead-main">

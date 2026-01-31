@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const navItems = [
@@ -11,6 +11,12 @@ const navItems = [
 
 export default function StudentLayout() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="student-dashboard">
@@ -36,11 +42,11 @@ export default function StudentLayout() {
           </nav>
         </div>
         <div className="student-header__right">
-          <span className="student-user">{user?.name ?? "Student"}</span>
+          {user?.name && <span className="student-user">{user.name}</span>}
           <Link to="/student/profile" className="student-profile-link">
             Profile
           </Link>
-          <button type="button" className="student-logout" onClick={logout}>
+          <button type="button" className="student-logout" onClick={handleLogout}>
             Log out
           </button>
         </div>

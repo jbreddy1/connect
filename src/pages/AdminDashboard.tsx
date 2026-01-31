@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="dashboard-placeholder">
@@ -10,7 +16,7 @@ export default function AdminDashboard() {
         <Link to="/" className="dashboard-placeholder-brand">Connect</Link>
         <div>
           <span className="student-user" style={{ marginRight: "1rem" }}>{user?.name}</span>
-          <button type="button" className="student-logout" onClick={logout}>Log out</button>
+          <button type="button" className="student-logout" onClick={handleLogout}>Log out</button>
         </div>
       </header>
       <main className="dashboard-placeholder-main">
